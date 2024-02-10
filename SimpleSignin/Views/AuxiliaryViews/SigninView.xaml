@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Grid
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SimpleSignin.Views.AuxiliaryViews.SigninView"
+    xmlns:c="clr-namespace:SimpleSignin.Helpers.Converters"
+    xmlns:vm="clr-namespace:SimpleSignin.ViewModels"
+    x:DataType="vm:HomeViewModel"
+    RowDefinitions="150,70,200,20,50,70,90"
+    ColumnDefinitions="*"
+    Padding="10,0">
+
+    <Image
+        Grid.Row="0"
+        Grid.Column="0"
+        HeightRequest="150"
+        WidthRequest="150"
+        Source="{StaticResource SignIn}"/>
+
+    <Label
+        Grid.Row="1"
+        Grid.Column="0"
+        Text="You may use your phone# or email address to sign-in&#10;Alternatively, you can sign-in as a guest."
+        HorizontalTextAlignment="Center"
+        VerticalTextAlignment="Start"/>
+
+    <Grid
+        Grid.Row="2"
+        Grid.Column="0">
+
+        <Border
+            Stroke="{StaticResource PageFillTextColor}">
+
+            <Grid
+                RowDefinitions="60,80,50"
+                ColumnDefinitions="*"
+                VerticalOptions="Center"
+                Padding="10">
+
+                <Grid
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    RowDefinitions="50"
+                    ColumnDefinitions="*,*">
+
+                    <Grid
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        RowDefinitions="50,4"
+                        ColumnDefinitions="*">
+
+                        <!--Tab ON-->
+                        <HorizontalStackLayout
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Spacing="10"
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding IsPhoneSignin}">
+
+                            <Image
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Source="{Binding IsPhoneSignin, Converter={c:ToggleConverter}, ConverterParameter=PhoneOn_PhoneOff}"
+                                HeightRequest="25"
+                                WidthRequest="25"/>
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Text="Phone"
+                                TextColor="{StaticResource FillColor}"
+                                FontSize="18"
+                                HorizontalTextAlignment="Center"/>
+                        </HorizontalStackLayout>
+
+                        <BoxView 
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="4"
+                            IsVisible="{Binding IsPhoneSignin}"/>
+
+                        <!--Tab OFF-->
+                        <HorizontalStackLayout
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Spacing="10"
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding IsEmailSignin}">
+
+                            <Image
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Source="{Binding IsPhoneSignin, Converter={c:ToggleConverter}, ConverterParameter=PhoneOn_PhoneOff}"
+                                HeightRequest="25"
+                                WidthRequest="25"/>
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Text="Phone"
+                                TextColor="{StaticResource PageFillTextColor}"
+                                FontSize="18"
+                                HorizontalTextAlignment="Center"/>
+                        </HorizontalStackLayout>
+
+                        <BoxView 
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="1"
+                            BackgroundColor="{StaticResource PageFillTextColor}"
+                            IsVisible="{Binding IsEmailSignin}"/>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer 
+                            Command="{Binding SwitchMemberSigninOptionCommand, Mode=OneTime}"
+                            CommandParameter="Phone"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        RowDefinitions="50,4"
+                        ColumnDefinitions="*">
+
+                        <!--Tab ON-->
+                        <HorizontalStackLayout
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Spacing="10"
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding IsEmailSignin}">
+
+                            <Image
+                                Source="{Binding IsEmailSignin, Converter={c:ToggleConverter}, ConverterParameter=EmailOn_EmailOff}"
+                                HeightRequest="25"
+                                WidthRequest="25"/>
+
+                            <Label
+                                Text="Email"
+                                TextColor="{StaticResource FillColor}"
+                                FontSize="18"
+                                HorizontalTextAlignment="Center"
+                                IsVisible="{Binding IsEmailSignin}"/>
+                        </HorizontalStackLayout>
+
+                        <BoxView 
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="4"
+                            IsVisible="{Binding IsEmailSignin}"/>
+
+                        <!--Tab OFF-->
+                        <HorizontalStackLayout
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Spacing="10"
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding IsPhoneSignin}">
+
+                            <Image
+                                Source="{Binding IsEmailSignin, Converter={c:ToggleConverter}, ConverterParameter=EmailOn_EmailOff}"
+                                HeightRequest="25"
+                                WidthRequest="25"/>
+
+                            <Label
+                                Text="Email"
+                                TextColor="{StaticResource PageFillTextColor}"
+                                FontSize="18"
+                                HorizontalTextAlignment="Center"/>
+                        </HorizontalStackLayout>
+
+                        <BoxView 
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="1"
+                            BackgroundColor="{StaticResource PageFillTextColor}"
+                            IsVisible="{Binding IsPhoneSignin}"/>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer 
+                            Command="{Binding SwitchMemberSigninOptionCommand, Mode=OneTime}"
+                            CommandParameter="Email"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Grid>
+
+                <!--Phone-->
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HeightRequest="45"
+                    StrokeShape="RoundRectangle, 0"
+                    Stroke="{StaticResource PageFillTextColor}"
+                    IsVisible="{Binding IsPhoneSignin}">
+
+                    <Grid
+                        RowDefinitions="*"
+                        ColumnDefinitions="70,1,*">
+
+                        <Picker 
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            FontSize="18"
+                            SelectedItem="{Binding CountrySignin, Mode=TwoWay}">
+
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>+60</x:String>
+                                    <x:String>+61</x:String>
+                                    <x:String>+65</x:String>
+                                    <x:String>+92</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+
+                        <BoxView
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            WidthRequest="1"
+                            HeightRequest="30"
+                            BackgroundColor="{StaticResource PageFillTextColor}"/>
+
+                        <Entry
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Text="{Binding PhoneSignin}"
+                            TextColor="{StaticResource PageFillTextColor}"
+                            FontSize="18"
+                            VerticalOptions="Center"
+                            Placeholder="Phone Number"
+                            Keyboard="Telephone"/>
+                    </Grid>
+                </Border>
+
+                <!--Email-->
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HeightRequest="45"
+                    StrokeShape="RoundRectangle, 0"
+                    Stroke="{StaticResource PageFillTextColor}"
+                    IsVisible="{Binding IsEmailSignin}">
+
+                    <Entry
+                        Text="{Binding EmailSignin}"
+                        TextColor="{StaticResource PageFillTextColor}"
+                        FontSize="18"
+                        VerticalOptions="Center"
+                        Placeholder="Email"
+                        Keyboard="Email"/>
+                </Border>
+
+                <!--T&C-->
+                <VerticalStackLayout
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HorizontalOptions="Center">
+
+                    <Label 
+                        Text="By Signing in, you accept and agree to our "
+                        TextColor="{StaticResource PageFillTextColor}"/>
+
+                    <HorizontalStackLayout
+                        HorizontalOptions="Center">
+
+                        <Label 
+                            Text="Terms Of Use" 
+                            TextColor="{StaticResource FillColor}" 
+                            TextDecorations="Underline" 
+                            FontAttributes="Italic">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding GoToPageCommand, Mode=OneTime}"
+                                    CommandParameter="TermsOfUsePage"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Label 
+                            Text=" &amp; "
+                            TextColor="{StaticResource PageFillTextColor}"/>
+
+                        <Label 
+                            Text="Privacy Policy" 
+                            TextColor="{StaticResource FillColor}" 
+                            TextDecorations="Underline" 
+                            FontAttributes="Italic">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding GoToPageCommand, Mode=OneTime}"
+                                    CommandParameter="PrivacyPolicyPage"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+        <Label
+            Text="Sign-in with"
+            FontAttributes="Bold"
+            HeightRequest="30"
+            Margin="20,-15"
+            Padding="5"
+            BackgroundColor="{StaticResource PageFillColor}"
+            HorizontalOptions="Start"
+            VerticalOptions="Start"/>
+    </Grid>
+
+    <!--Sign-in Member-->
+    <Button
+        Grid.Row="4"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        Text="I'm Member"
+        FontSize="18"
+        Padding="0,0,0,1"
+        CornerRadius="25"
+        HeightRequest="40"
+        Command="{Binding SigninCommand, Mode=OneTime}" 
+        CommandParameter="SelectItemPage,Member"/>
+
+    <!--Sign-in Guest-->
+    <Button
+        Grid.Row="5"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        Text="I'm Guest"
+        FontSize="18"
+        Padding="0,0,0,1"
+        CornerRadius="25"
+        HeightRequest="40"
+        Command="{Binding SigninCommand, Mode=OneTime}" 
+        CommandParameter="SelectItemPage,Guest"/>
+
+    <!--Contact us-->
+    <Grid
+        Grid.Row="6"
+        Grid.Column="0"
+        RowDefinitions="70,20"
+        ColumnDefinitions="*,*,*"
+        ColumnSpacing="20"
+        HorizontalOptions="Center"
+        Padding="0,10,0,0">
+
+        <Border
+            Grid.Row="0"
+            Grid.Column="0"
+            WidthRequest="70"
+            HeightRequest="70"
+            StrokeShape="RoundRectangle, 20,0,0,20"
+            Stroke="Transparent"
+            BackgroundColor="CornflowerBlue">
+
+            <Image
+                HeightRequest="50"
+                WidthRequest="50"
+                Source="aboutuswhite.png"/>
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer 
+                    Command="{Binding GoToPageCommand, Mode=OneTime}" 
+                    CommandParameter="AboutUsPage"/>
+            </Border.GestureRecognizers>
+        </Border>
+
+        <Label 
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="About Us"
+            HorizontalTextAlignment="Center">
+
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer 
+                    Command="{Binding GoToPageCommand, Mode=OneTime}" 
+                    CommandParameter="AboutUsPage"/>
+            </Label.GestureRecognizers>
+        </Label>
+
+        <Border
+            Grid.Row="0"
+            Grid.Column="1"
+            WidthRequest="70"
+            HeightRequest="70"
+            StrokeShape="RoundRectangle, 20,0,0,20"
+            Stroke="Transparent"
+            BackgroundColor="Purple">
+
+            <Image
+                HeightRequest="50"
+                WidthRequest="50"
+                Source="gallerywhite.png"/>
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer 
+                    Command="{Binding GoToPageCommand, Mode=OneTime}" 
+                    CommandParameter="GalleryPage"/>
+            </Border.GestureRecognizers>
+        </Border>
+
+        <Label 
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="Gallery"
+            HorizontalTextAlignment="Center">
+
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer 
+                    Command="{Binding GoToPageCommand, Mode=OneTime}" 
+                    CommandParameter="GalleryPage"/>
+            </Label.GestureRecognizers>
+        </Label>
+
+        <Border
+            Grid.Row="0"
+            Grid.Column="2"
+            WidthRequest="70"
+            HeightRequest="70"
+            StrokeShape="RoundRectangle, 20,0,0,20"
+            Stroke="Transparent"
+            BackgroundColor="BlueViolet">
+
+            <Image
+                HeightRequest="50"
+                WidthRequest="50"
+                Source="locationwhite.png"/>
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer 
+                    Command="{Binding GoToPageCommand, Mode=OneTime}" 
+                    CommandParameter="LocationPage"/>
+            </Border.GestureRecognizers>
+        </Border>
+
+        <Label 
+            Grid.Row="1"
+            Grid.Column="2"
+            Text="Location"
+            HorizontalTextAlignment="Center">
+
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer 
+                    Command="{Binding GoToPageCommand, Mode=OneTime}" 
+                    CommandParameter="LocationPage"/>
+            </Label.GestureRecognizers>
+        </Label>
+    </Grid>
+</Grid>

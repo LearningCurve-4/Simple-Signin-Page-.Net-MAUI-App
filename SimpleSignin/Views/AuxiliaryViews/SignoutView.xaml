@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Grid
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SimpleSignin.Views.AuxiliaryViews.SignoutView"
+    xmlns:vm="clr-namespace:SimpleSignin.ViewModels"
+    x:DataType="vm:HomeViewModel"
+    RowDefinitions="*"
+    ColumnDefinitions="*"
+    RowSpacing="10"
+    Padding="5">
+
+    <Border
+        Grid.Row="0"
+        Grid.Column="0"
+        WidthRequest="180"
+        HeightRequest="150"
+        BackgroundColor="{StaticResource FillColor}">
+
+        <Grid
+            RowDefinitions="*,40"
+            ColumnDefinitions="*">
+
+            <Image  
+                Grid.Row="0"
+                Grid.Column="0"
+                Source="{StaticResource SignOut}"
+                HeightRequest="100"
+                WidthRequest="100" />
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Click to Sign-out"
+                TextColor="{StaticResource FillTextColor}"
+                FontSize="20"
+                HorizontalTextAlignment="Center" />
+        </Grid>
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer 
+                Command="{Binding SignoutCommand, Mode=OneTime}" />
+        </Border.GestureRecognizers>
+    </Border>
+</Grid>

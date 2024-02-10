@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SimpleSignin.Views.Pages.AboutUsPage"
+    xmlns:local="clr-namespace:SimpleSignin"
+    xmlns:rv="clr-namespace:SimpleSignin.Views.ReuseableViews"
+    xmlns:vm="clr-namespace:SimpleSignin.ViewModels"
+    x:DataType="vm:BaseViewModel">
+
+    <ContentPage.BindingContext>
+        <vm:BaseViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid
+        RowDefinitions="50,*"
+        ColumnDefinitions="*">
+
+        <!--Header-->
+        <Grid
+            Grid.Row="0"
+            Grid.Column="0"
+            RowDefinitions="*"
+            ColumnDefinitions="35,*"
+            ColumnSpacing="10"
+            Padding="10,0"
+            BackgroundColor="{StaticResource HeaderBarFillColor}">
+
+            <rv:BackImageView 
+                Grid.Row="0"
+                Grid.Column="0" />
+
+            <Label 
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="About App"
+                TextColor="{StaticResource HeaderBarFillTextColor}"
+                FontSize="22" />
+
+            <rv:BusyIndicatorView
+                Grid.Row="0" 
+                Grid.Column="0"
+                Grid.ColumnSpan="2" />
+        </Grid>
+
+        <!--Body-->
+        <ScrollView
+            Grid.Row="1"
+            Grid.Column="0"
+            Orientation="Vertical"
+            Padding="5,0"
+            VerticalScrollBarVisibility="Never">
+
+            <WebView
+                Source="{x:Static local:GlobalVariables.aboutAppWebPage}" />
+        </ScrollView>
+
+        <!--Footer-->
+    </Grid>
+</ContentPage>
